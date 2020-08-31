@@ -1,0 +1,119 @@
+{% load static %}
+<head>
+
+
+<style>
+img {
+  border-radius: 50%;
+}
+</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <!-- Site Title-->
+    <title>DaBBa - A HTML Template For Blog & Shop</title>
+    <!-- Style CSS-->
+  <link href="{% static 'styles/vendor.css' %}" rel="stylesheet"><link href="{% static 'styles/app.css' %}" rel="stylesheet"></head>
+  <body>
+    <!-- Navbar-->
+    <div class="header-three-container">
+      <div class="container-fluid header-three-top-bar py-11px px-12px">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+
+          </div>
+          <div class="col-lg-4 text-center"><a class="navbar-brand" href="{% url 'home' %}"><img class="etcodes-normal-logo" src="{% static 'images/logo.png'%}" width="141" height="31" alt="Logo"><img class="etcodes-mobile-logo" src="{% static 'images/logo.png' %}" width="141" height="31" alt="Logo"></a></div>
+          <div class="col-lg-4">
+            <div class="navbar-modules d-none d-lg-flex justify-content-end">
+              <div class="navbar-module"><a href="#"><i class="fab fa-medium-m"></i></a></div>
+              <div class="navbar-module"><a href="#"><i class="fab fa-instagram"></i></a></div>
+              <div class="navbar-module"><a href="#"><i class="fab fa-twitter"></i></a></div>
+              <div class="navbar-module header-search-bar"><a class="search-icon do-toggle-search-bar" href="#"><i class="fas fa-search"></i></a>
+                <form class="search-form" role="search" action="/search" method='GET'>
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                    <input class="form-control" type="text" placeholder="Search..." value="" name="search">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-light header-three">
+        <div class="container-fluid"><a class="navbar-brand" href="index.html"><img class="etcodes-normal-logo" src="images/logo.png" width="141" height="31" alt="Logo"><img class="etcodes-mobile-logo" src="images/logo.png" width="141" height="20" alt="Logo"></a>
+          <button class="navbar-toggler hamburger-menu-btn" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span>toggle menu</span></button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+               <li class="nav-item dropdown mega_menu_holder"><a href="{% url 'home' %}" class="nav-link dropdown-toggle" >Home</a>
+            
+              </li>
+              <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Videos</a>
+                
+              </li>
+             
+   
+               <li class="nav-item dropdown mega_menu_holder"><a href="/contact_us" class="nav-link dropdown-toggle" >Contact Us</a>
+               
+                  </li>
+                
+                 
+              </li>
+              <li class="nav-item dropdown mega_menu_holder"><a href="/about_us" class="nav-link dropdown-toggle"  >About Us</a>
+                
+              </li>
+              
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkShop" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi {{request.user.first_name}}</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkShop"><a href="/profile" class="dropdown-item" >Profile</a><a href="/logout" class="dropdown-item" >Logout</a></div>
+              </li>
+              {% else %}
+              <li class="nav-item dropdown mega_menu_holder"><a href="/login" class="nav-link dropdown-toggle">Login</a>
+             {% endif %}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+
+<!-- some CSS styling changes and overrides -->
+<br>
+<br>
+
+<table style="width:280%">
+<tr>
+<th>
+<img src="{{ pro.prof_pic.url }}" width="350" height="350" style="width:200px; height:200px; margin-left:50px;"  alt="about-pic">
+
+<div>
+<p style="text-align:center;"><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome {{request.user.first_name}}</h3></p></div>
+<p><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@{{request.user.username}}</h6></p>
+<p><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bio:-{{pro.bio}}</h6></p>
+<p><h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Location:-{{pro.location}}</h6></p>
+</th>
+<th>
+<div class="col-sm-6">
+<form method="POST" action="" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="hidden" name="user_id" value="{{ request.user.id }}">
+Please Update Bio : -
+<input type="text" class="" value="{{pro.bio}}" name="bio" placeholder="Your Bio">
+Location : 
+<input type="text" class="" value="{{pro.location}}" name="location" placeholder="Location">
+Your Email : -
+<input type="text" class="" value="{{request.user.email}}" name="email" placeholder="Location">
+Your Total Comments :
+<input type="text" class="" value="0" name="comment" placeholder="Location">
+Change Profile Picture: -
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="prof_pic" accept=".jpg, .png, .jpeg" style="top:10px" src={{pro.prof_pic.url}}>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-shadow disabled" type="submit">Update</button>
+</th>
+</form>
+</div>
+</table>
+</body>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+    
+    {% block content %}
+    {% load static %}
+      
+
+
+
+      {% if result_slide or result_late %}
+      <center> <h4> Your Search Result For {{request.GET.search}} Matches {{ count.count }}Following....</h4></center>
+      {% else %}
+     
+      <center> <h4> Your Search Result For {{request.GET.search}} Matches Nothing....</h4></center>
+      {% endif %} 
+      
+
+
+
+
+
+      {% for r1 in result_slide %}
+      <div class="container mb-80px mt-60px">
+      <div class="row large-gutters">
+      <div class="col-lg-6 py-25px">
+      <h2 class="mb-15px"><a href="/read_blog/{{r1.id}}">{{r1.title}}</br></h2>
+      <a href="/read_blog/{{r1.id}}">{{r1.short_desc}}</br>
+      </div>
+      </div>
+      </div>
+     {% endfor %}
+
+      {% for r2 in result_late %}
+      <div class="container mb-80px mt-60px">
+      <div class="row large-gutters">
+      <div class="col-lg-6 py-25px">
+      <h2 class="mb-15px"><a href="/read_blog/{{r2.id}}">{{r2.title}}</br></h2>
+      <a href="/read_blog/{{r1.id}}">{{r2.short_desc}}</a></br>
+      
+       </div>
+      </div>
+      </div>
+     {% endfor %}
+     
+
+
+             
+
+       
+    
+{% endblock content %}
+<!-- Mirrored from www.energeticthemes.com/templates/dabba/blog-single-post.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Aug 2020 06:35:53 GMT -->
+</html>
+ 

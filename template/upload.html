@@ -1,0 +1,24 @@
+<html>
+<body>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+Id:-
+<input type="text" name="id"></br>
+Title:-
+<input type="text" name="title"></br>
+
+Short:-
+<input type="text" name="short"></br>
+
+Long:-
+<input type="text" name="long"></br>
+
+Date:-
+<input type="date" name="date"></br>
+Photo:-
+<input type="file" name="photo" accept=".jpg"></br>
+<button type="submit">submit</button>
+</form>
+</body>
+</html>

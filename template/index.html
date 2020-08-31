@@ -1,0 +1,104 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+      <!-- End Navbar-->
+    </div>
+    <!-- Slider -->
+    <div class="slider-call blog-post blog-slider blog-post blog-img-overlay mb-50px mt-60px" data-slick="{&quot;variableWidth&quot;: true, &quot;infinite&quot;:false,&quot;arrows&quot;:false,&quot;dots&quot;:true, &quot;responsive&quot;: [{&quot;breakpoint&quot;:420,&quot;settings&quot;:{&quot;variableWidth&quot;: false}}] }">
+      {% for slid in slids %}
+      <article>
+        <div class="entry-media"><img src="{{slid.photo.url}}" alt="Entry Image"></div>
+        <div class="entry-content-wrapper">
+          <div class="entry-meta-top"><span class="entry-meta-category"><a href="/read_blog/{{slid.id}}">Posted By: Admin</a></span><span class="post-meta-date">{{slid.date}}</span></div>
+          <h2 class="entry-title"><a href="/read_blog/{{slid.id}}">{{ slid.title }}</a></h2>
+          <div class="entry-meta-top"><span class="entry-meta-category"><a href="/read_blog/{{slid.id}}">{{ slid.short_desc }}</a></span>
+          
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <!-- End Slider-->
+    <!-- Latest Posts-->
+    <div class="container mb-75px">
+      <div class="row align-items-center mb-25px">
+        <div class="col-md-9">
+          <h4 class="text-grey font-weight-bold">Burning Posts</h4>
+        </div>
+      </div>
+      <!-- Blog-->
+      
+      <div class="row blog-post blog-img-overlay">
+       {% for burn in burns %}
+        <div class="col-md-6 col-lg-4">
+          <article>
+            <div class="entry-media"><img src="{{burn.photo.url}}" alt="Entry Image"/>
+            </div>
+            <div class="entry-content-wrapper">
+            <h5 class="entry-title"><a href="/read_blog/{{burn.id}}">{{burn.title}}</a></h5>
+              <div class="entry-meta-top"><span class="entry-meta-category"><a href="/read">{{burn.short_desc}}</a></span><span class="post-meta-date">{{burn.date}}</span></div>
+            </div>
+          </article>
+      </div>
+      {% endfor %}
+      </div>
+         
+      <!-- End Blog-->
+      <div class="text-center mt-30px mb-80px"><a class="btn box-shadow-none" href="#">Load More</a></div>
+    </div>
+    <!-- Subscribe Box -->
+    <form method="POST">
+    {% csrf_token %}
+    <div class="container mb-80px py-10px">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 text-center">
+          <h1 class="font-weight-bold mb-20px">Subscribe Newsletter and Stay Informed</h1>
+          <p class="mb-35px">Loved Our Posts ? Please Subscribe By Entering Your Email Below, To Get All Latest Post Notifiction In Your Inbox.</p>
+           {% if messages %}
+              {% for message in messages %}
+              <p class="mb-35px">{{message}}</p>
+              {% endfor %}
+              {% endif %}
+
+          <div class="form-group form-row mb-0">
+            <div class="input-group mb-3">
+              <input class="form-control validate-required validate-email" type="email" name="email_sub" placeholder="Your email">
+             
+              <div class="input-group-append">
+                <button class="btn btn-light box-shadow-none" type="submit">Subscribe</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </form>
+    <!-- Footer-->
+    <footer class="web-footer footer">
+      <div class="web-footer footer py-45px primary-bg-color">
+        <div class="container">
+          <div class="row large-gutters">
+            <div class="col-md-6">
+              <div class="footer-widget">
+                <p class="m-md-0">© 2018 Energetic Themes</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="footer-widget">
+                <ul class="list-inline m-0 text-md-right footer-nav">
+                  <li class="list-inline-item mb-0"><a href="https://www.facebook.com/energeticthemes">Privacy Policy</a></li>
+                  <li class="list-inline-item mb-0"><a href="https://instagram.com/energeticthemes">Terms & Conditions</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer-->
+    <!-- javascript files-->
+  <script type="text/javascript" src="{% static 'scripts/vendor.js' %}"></script><script type="text/javascript" src="{% static 'scripts/app.js' %}"></script></body>
+{% endblock content %}
+<!-- Mirrored from www.energeticthemes.com/templates/dabba/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Aug 2020 06:35:22 GMT -->
+</html>

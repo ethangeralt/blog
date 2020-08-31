@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <!-- End Navbar-->
+    </div>
+    {% for msg in messages %}
+    <center> <h4>{{msg}}</h4><center>
+    {% endfor %}
+    <div class="container mb-40px mt-60px">
+      <div class="row large-gutters">
+        <div class="col-lg-6 mb-40px"><img src="images/about.jpg" alt="about-pic"></div>
+        <div class="col-lg-6 mb-40px">
+          <h2 class="mb-15px">Get in touch with Me</h2>
+          <p>Pellentesque sagittis nibh venenatis sapieni congue consectetur. Integer nulla nunc, efficitur sit amet sagittis sed, suscipit et magna. Nulla porttitor neque non dapibus nec elit tristique sagittis.</p>
+          <p class="lead mb-25px">[email&#160;protected]<br> + 91-455-3354-202</p>
+          <form method="POST" action="/contact_us">
+          {% csrf_token %} 
+            <div class="row mb-0">
+              <div class="col-sm-6 col-xs-12">
+                <div class="form-group mb-30px">
+                  <input class="form-control" id="form_name" type="text" name="name" placeholder="Name" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <div class="form-group mb-30px">
+                  <input class="form-control" id="form_email" type="email" name="email" placeholder="Email" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row mb-15px">
+              <div class="form-group col-md-12">
+                <div class="form-group mb-0">
+                  <textarea class="form-control" id="form_message" name="message" placeholder="Comment" rows="7" required></textarea>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-xs-12 align-left">
+                <button class="btn btn-shadow disabled" type="submit" style="pointer-events: all; cursor: pointer;">Submit</button>
+              </div>
+            </div>
+            <div class="loading-spinner"></div>
+            <div class="messages mt-20px"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    <footer class="web-footer footer">
+      <div class="web-footer footer py-45px primary-bg-color">
+        <div class="container">
+          <div class="row large-gutters">
+            <div class="col-md-6">
+              <div class="footer-widget">
+                <p class="m-md-0">© 2018 Energetic Themes</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="footer-widget">
+                <ul class="list-inline m-0 text-md-right footer-nav">
+                  <li class="list-inline-item mb-0"><a href="https://www.facebook.com/energeticthemes">Privacy Policy</a></li>
+                  <li class="list-inline-item mb-0"><a href="https://instagram.com/energeticthemes">Terms & Conditions</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer-->
+    <!-- javascript files-->
+  <script data-cfasync="false" src="atic/email-decode.min.js"></script><script type="text/javascript" src="{% static 'scripts/vendor.js'%}"></script><script type="text/javascript" src="{% static 'scripts/app.js' %}"></script></body>
+{% endblock content %}
+<!-- Mirrored from www.energeticthemes.com/templates/dabba/page-contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Aug 2020 06:35:47 GMT -->
+</html>

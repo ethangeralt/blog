@@ -1,0 +1,212 @@
+<!-- This Section is for Extending Base Template Includes Header File and Section {Logo, Search, Nav Bar} etc-->
+{% extends 'base.html' %}
+    
+    {% block content %}
+    {% load static %}
+<!--Header Extend Section Ends Here-->
+
+<!--This Section is loading Data from Slideshow in read_slid and Using for loop saving in slids -->
+      {% for slids in read_slid %}
+    <div class="container-fluid px-20px px-md-60px mt-60px mb-lg-35px">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="entry-media"><img src="{{slids.photo.url}}" alt="Card image cap"></div>
+        </div>
+        <div class="col-lg-6 pt-40px pb-lg-30px">
+          <div class="entry-meta-top"><span class="entry-meta-category"><a href="/about_us">Posted By: Admin</a></span><span class="post_meta_date">{{slids.date}}</span></div>
+          <h1 class="single-post-entry-title entry-title">{{slids.title}} </h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="blog-post single-post">
+            <article>
+              <div class="entry-content-wrapper">
+                <div class="entry-content">
+                  <p>{{slids.long_dec}}</p>
+                </div>
+                <div class="entry-meta-bottom mt-40px mb-40px">
+                  <div class="text-lg-left">
+                  
+                  </div>
+                </div>
+                 {% endfor %}
+<!--This Section is loading Data from Latest in read_late and Using for loop saving in late -->
+    {% for late in read_late %}
+    <div class="container-fluid px-20px px-md-60px mt-60px mb-lg-35px">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="entry-media"><img src="{{late.photo.url}}" alt="Card image cap"></div>
+        </div>
+        <div class="col-lg-6 pt-40px pb-lg-30px">
+          <div class="entry-meta-top"><span class="entry-meta-category"><a href="/about_us">Posted By: Admin</a></span><span class="post_meta_date">{{slids.date}}</span></div>
+          <h1 class="single-post-entry-title entry-title">{{late.title}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="blog-post single-post">
+            <article>
+              <div class="entry-content-wrapper">
+                <div class="entry-content">
+                  <p>{{late.long_dec}}</p>
+                </div>
+                <div class="entry-meta-bottom mt-40px mb-40px">
+                  <div class="text-lg-left">
+                  
+                  </div>
+                </div>
+                 {% endfor %}             
+      
+                <!-- Comments Area-->
+                <!--Here Is the fetching Comments from Slideshow Post through For loop is fetching Data-->
+                {% if comm %}
+                <div class="comments-area" id="comments">
+                  <ol class="comment-list">
+                    <li class="comment even thread-even depth-1" id="comment-1">
+                      {% for comments in comm %}
+                      <article class="comment-body" id="div-comment-1">
+                        <footer class="comment-meta">
+                          <div class="comment-author vcard"><b class="fn"><a class="url" href="#" rel="external nofollow">{{comments.name}}</a></b><span class="says">Says:</span></div>
+                          <!-- .comment-author-->
+                          <div class="comment-metadata"><a href="#">
+                              <time datetime="2018-07-29T00:00:00">{{comments.created_at}}</time></a></div>
+                          <!-- .comment-metadata-->
+                          <!-- .comment-meta-->
+                          <div class="comment-content">
+                            <p>{{comments.comment}}</p>
+                          </div>
+                          <!-- .comment-content-->
+                          <div class="reply"><a class="comment-reply-link" href="#">Reply</a></div>
+                        </footer>
+                      </article>
+                      {% endfor %}
+                      {% endif %}
+
+       <!--Here Is the fetching Comments from Latest Post as For is fetching Data-->               
+                {% if comm_latest %}
+                <div class="comments-area" id="comments">
+                  <ol class="comment-list">
+                    <li class="comment even thread-even depth-1" id="comment-1">
+                      {% for comments in comm_latest %}
+                      <article class="comment-body" id="div-comment-1">
+                        <footer class="comment-meta">
+                          <div class="comment-author vcard"><b class="fn"><a class="url" href="#" rel="external nofollow">{{comments.name}}</a></b><span class="says">Says:</span></div>
+                          <!-- .comment-author-->
+                          <div class="comment-metadata"><a href="#">
+                              <time datetime="2018-07-29T00:00:00">{{comments.created_at}}</time></a></div>
+                          <!-- .comment-metadata-->
+                          <!-- .comment-meta-->
+                          <div class="comment-content">
+                            <p>{{comments.comment}}</p>
+                          </div>
+                          <!-- .comment-content-->
+                          <div class="reply"><a class="comment-reply-link" href="#">Reply</a></div>
+                        </footer>
+                      </article>
+                      {% endfor %}
+                      {% endif %}
+                        
+                      <!-- .comment-body-->
+                      <!-- #comment-##-->
+                   
+      
+<!--This Section Below is for Posting comments, Below 2 For Loop is there One For Loop is for taking Post Id for Latest and Slideshow and Saving In Post_Id so that comments can be Realted to Post-->
+
+                  <div class="comment-respond" id="respond">
+                  
+                    <h3 class="comment-reply-title" id="reply-title">Leave Your Thoughts Below </h3>
+                    <form class="comment-form" id="commentform" action="" method="POST" novalidate="">
+                      {% csrf_token %}
+                      <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+                      <p class="comment-form-author">  
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input id="name" name="name" type="text" value="{{request.user.first_name}}" size="30" maxlength="245" required="required" readonly>
+                      </p>
+                    
+                      <p class="comment-form-email">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input id="email" name="email" type="email" value="{{request.user.email}}"  contentEditable="false" size="30" maxlength="100" aria-describedby="email-notes" required="required" readonly>
+                      </p>
+                      <!--Saving Post_Id Of Slideshow through slids.id-->
+                      {% for slids in read_slid %}
+                        <input id="email" name="post_id" type="hidden" value="{{slids.id}}" >
+                      {% endfor %}
+                      <!--Saving Post_Id Of Latest through late.id-->
+                      {% for late in read_late %}
+                          <input id="email" name="post2_id" type="hidden" value="{{late.id}}" >
+                      {% endfor %}
+                      <p class="comment-form-comment">Comment <span class="required">*</span>
+                        <label for="comment">Comment</label>
+                        <textarea id="comment" name="comment" cols="45" rows="8" required="required"></textarea>
+                      </p>
+                      
+                      <p class="form-submit">
+                        <input class="submit" id="submit" name="submit" type="submit" value="Post Comment">
+                        <input id="comment_post_ID" type="hidden" name="comment_post_ID" value="1">
+                        <input id="comment_parent" type="hidden" name="comment_parent" value="0">
+                      </p>
+                    </form>
+                  </div>
+                   
+                  <!-- #respond-->
+                </div>
+               
+                <!-- End Comments Area-->
+                <!-- Post navigation-->
+                <div class="navigation post-navigation">
+                  <div class="row align-items-center nav-links">
+                    <div class="col-lg-6 text-lg-left">
+                      <div class="nav-previous mb-15px">
+                        <div class="nav-subtitle"> Previous Post </div>
+                        <div class="nav-title"><a href="#"><i class="fas fa-long-arrow-alt-left fa-lg mr-1" aria-hidden="true"> </i></a></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 text-lg-right">
+                      <div class="nav-next mb-15px">
+                        <div class="nav-subtitle">Next Post</div>
+                        <div class="nav-title"><a href="#">
+                           <i class="fas fa-long-arrow-alt-right fa-lg ml-1" aria-hidden="true"></i></a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer-->
+    <footer class="web-footer footer">
+      <div class="web-footer footer py-45px primary-bg-color">
+        <div class="container">
+          <div class="row large-gutters">
+            <div class="col-md-6">
+              <div class="footer-widget">
+                <p class="m-md-0">© 2018 Energetic Themes</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="footer-widget">
+                <ul class="list-inline m-0 text-md-right footer-nav">
+                  <li class="list-inline-item mb-0"><a href="https://www.facebook.com/energeticthemes">Privacy Policy</a></li>
+                  <li class="list-inline-item mb-0"><a href="https://instagram.com/energeticthemes">Terms & Conditions</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer-->
+    <!-- javascript files-->
+  <script type="text/javascript" src="{% static 'scripts/vendor.js' %}"></script><script type="text/javascript" src="{% static 'scripts/app.js' %}"></script></body>
+{% endblock content %}
+<!-- Mirrored from www.energeticthemes.com/templates/dabba/blog-single-post.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Aug 2020 06:35:53 GMT -->
+</html>
+ 
